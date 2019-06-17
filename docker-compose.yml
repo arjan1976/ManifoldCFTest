@@ -5,6 +5,8 @@ services:
       context: ./
       dockerfile: Dockerfile
     restart: always
+    networks:
+     - manifoldnet
     ports:
      - "8345:8345"
     depends_on:
@@ -16,8 +18,14 @@ services:
     environment:
       POSTGRES_PASSWORD: smartarjan01
       PGDATA: /var/lib/postgresql/data/pgdata
+    networks:
+      - manifoldnet
     volumes:
       - pgdata:/var/lib/postgresql/data/pgdata
+
+networks:
+  manifoldnet:
+    driver: bridge
 
 volumes:
   pgdata:  
